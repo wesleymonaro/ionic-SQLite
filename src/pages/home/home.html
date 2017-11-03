@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="primary">
+
+    <ion-title>
+      Ionic SQLite Movies
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="onSave('create')">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <p *ngIf="movies && movies.length == 0; else moviesList">No movies.</p>
+
+  <ng-template #moviesList>
+    <ion-list>
+
+      <ion-item-sliding detail-push *ngFor="let movie of movies" #itemSliding>
+        <ion-item (click)="onSave('update', itemSliding, movie)">{{ movie.title }}</ion-item>
+        <ion-item-options>
+          <button ion-button icon-only color="primary" (click)="onSave('update', itemSliding, movie)">
+            <ion-icon name="create"></ion-icon>
+          </button>
+          <button ion-button icon-only color="danger" (click)="onDelete(movie)">
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+
+    </ion-list>
+  </ng-template>
+
+</ion-content>
